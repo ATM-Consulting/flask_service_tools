@@ -10,7 +10,7 @@ setup(
         "PyMySQL",
     ],
     description="Common utilities for Flask API services",
-    url="https://gitlab.atm-consulting.fr/atm-consulting/ai-services-hub/flask_service_tool",
+    url="https://gitlab.atm-consulting.fr/atm-consulting/ai-services-hub/flask_service_tools",
     author="Sami Filali",
     author_email="sami.filali@atm-consulting.fr",
     classifiers=[
