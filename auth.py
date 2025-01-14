@@ -17,7 +17,7 @@ class AuthManager:
             response.raise_for_status()
 
 # EXAMPLE
-# from common_flask.auth import AuthManager
+# from flask_service_tools.auth import AuthManager
 #
 # auth_manager = AuthManager(access_control_url="http://access_control_service")
 #

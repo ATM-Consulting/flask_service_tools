@@ -48,8 +48,8 @@ class DBManager:
             session.close()
 
 # EXAMPLE
-# from common_flask.db import DBManager
-# from common_flask.config import Config
+# from flask_service_tools.db import DBManager
+# from flask_service_tools.config import Config
 #
 # db_manager = DBManager({
 #     "host": Config.DB_HOST,
