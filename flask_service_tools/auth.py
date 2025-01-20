@@ -11,10 +11,11 @@ class AuthManager:
             "required_permissions": required_permissions
         }
         response = requests.post(f"{self.access_control_url}/validate_access_token", json=payload)
+        data = response.json()
         if response.status_code == 200:
-            return True
+            return True, data.get('user_uuid', "")
         else:
-            response.raise_for_status()
+            return False, ""
 
 # EXAMPLE
 # from flask_service_tools.auth import AuthManager
