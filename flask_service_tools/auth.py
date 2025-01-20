@@ -20,9 +20,8 @@ class AuthManager:
         response = requests.post(f"{self.access_control_url}/validate_access_token", json=payload)
         data = response.json()
         if response.status_code == 200:
-            return True, data.get('user_uuid', "")
-        else:
-            return False, data.get('message', "")
+            return True, data
+        return False, data
 
 # EXAMPLE
 # from flask_service_tools.auth import AuthManager
