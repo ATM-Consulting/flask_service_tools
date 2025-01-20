@@ -4,6 +4,7 @@ import os
 class Config:
     # Service configuration
     SERVICE_NAME = os.getenv("SERVICE_NAME", "service")
+    SERVICE_UUID = os.getenv("SERVICE_UUID", "service-uuid")
 
     # Access Control configuration
     ACCESS_CONTROL_URL = os.getenv("ACCESS_CONTROL_URL", "http://access_control_service")
