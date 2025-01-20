@@ -7,11 +7,11 @@ class AuthManager:
 
     def validate_token(self, authorization_header, required_permissions):
         if not authorization_header:
-            return False, "Authorization header must be set"
+            return False, {"message" : "Authorization header must be set"}
 
         parts = authorization_header.split()
         if len(parts) != 2 or parts[0].lower() != 'bearer':
-            return False, "Authorization header must be in the format 'Bearer _TOKEN_"
+            return False, {"message" : "Authorization header must be in the format 'Bearer _TOKEN_"}
 
         payload = {
             "token": parts[1],
