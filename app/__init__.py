@@ -1,5 +1,5 @@
 from .config import Config
-from services.flask_service_tools.flask_service_tools.logger import Logger
+from services.flask_service_tools.app.logger import Logger
 
 
 class FlaskServiceTools:
