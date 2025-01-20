@@ -3,8 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="flask_service_tools",
     version="0.1.0",
-    package_dir={"": "flask_service_tools"},
-    packages=find_packages(where="flask_service_tools"),
+    packages=find_packages(),
     install_requires=[
         "Flask",
         "SQLAlchemy",
