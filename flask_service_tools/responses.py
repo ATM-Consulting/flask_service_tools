@@ -3,7 +3,7 @@ from flask import jsonify
 
 class APIResponse:
     @staticmethod
-    def success(data=None, message="Success", status_code=200):
+    def success(data=None, message="", status_code=200):
         """
         Generate a standardized success response.
         :param data: The data to include in the response.
