@@ -22,11 +22,3 @@ class AuthManager:
         if response.status_code == 200:
             return True, data
         return False, data
-
-# EXAMPLE
-# from flask_service_tools.auth import AuthManager
-#
-# auth_manager = AuthManager(access_control_url="http://access_control_service")
-#
-# if not auth_manager.validate_token(token, required_permissions=["customer_support"]):
-#     return {"error": "Unauthorized"}, 403
