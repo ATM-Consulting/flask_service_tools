@@ -5,9 +5,16 @@ class AuthManager:
     def __init__(self, access_control_url):
         self.access_control_url = access_control_url
 
-    def validate_token(self, token, required_permissions):
+    def validate_token(self, authorization_header, required_permissions):
+        if not authorization_header:
+            return False, "Authorization header must be set"
+
+        parts = authorization_header.split()
+        if len(parts) != 2 or parts[0].lower() != 'bearer':
+            return False, "Authorization header must be in the format 'Bearer _TOKEN_"
+
         payload = {
-            "token": token,
+            "token": parts[1],
             "required_permissions": required_permissions
         }
         response = requests.post(f"{self.access_control_url}/validate_access_token", json=payload)
@@ -15,7 +22,7 @@ class AuthManager:
         if response.status_code == 200:
             return True, data.get('user_uuid', "")
         else:
-            return False, ""
+            return False, data.get('message', "")
 
 # EXAMPLE
 # from flask_service_tools.auth import AuthManager
