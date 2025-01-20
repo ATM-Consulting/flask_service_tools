@@ -9,6 +9,9 @@ class Config:
     # Access Control configuration
     ACCESS_CONTROL_URL = os.getenv("ACCESS_CONTROL_URL", "http://access_control_service")
 
+    # AI gateway configuration
+    AI_GATEWAY_URL = os.getenv("AI_GATEWAY_URL", "http://ai_gateway:7000")
+
     # Usage monitoring configuration
     UM_DB_HOST = os.getenv("UM_DB_HOST", "usage_monitoring")
     UM_DB_PORT = int(os.getenv("UM_DB_PORT", 3306))
