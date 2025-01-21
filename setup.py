@@ -8,6 +8,8 @@ setup(
         "Flask",
         "SQLAlchemy",
         "PyMySQL",
+        "mlflow",
+        "pydantic"
     ],
     description="Common utilities for Flask API services",
     url="https://github.com/ATM-Consulting/flask_service_tools.git",

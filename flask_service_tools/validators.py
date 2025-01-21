@@ -1,5 +1,5 @@
 from typing import Any, Dict, Optional
-from flask_service_tools.responses import APIResponse
+from .responses import APIResponse
 import logging
 
 
