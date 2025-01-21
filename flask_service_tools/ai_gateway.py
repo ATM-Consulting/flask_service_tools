@@ -27,7 +27,7 @@ class AIGatewayClient:
                 inputs={"messages": messages},
             )
             response_time_ms = int(time.time() * 1000) - start_time
-            self.logger.info("Prediction received successfully.")
+            self.logger.info(f"Response received successfully : {response}")
             return {
                 "response": response.get("choices", [{}])[0].get("text", ""),
                 "model": response.get("model", ""),
