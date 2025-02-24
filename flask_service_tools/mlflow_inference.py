@@ -26,24 +26,12 @@ class MLflowInferenceClient:
             self.logger = logger
         self.logger.info("MLflowInferenceClient initialized with URL: %s", self.server_url)
 
-    def list_endpoints(self):
-        """
-        Lists available endpoints.
-
-        Note:
-            Standard MLflow model servers (e.g., started with mlflow models serve)
-            do not implement an endpoint listing API. This is a placeholder.
-        """
-        self.logger.info("Listing endpoints is not implemented for MLflow inference server.")
-        return None
-
     def predict(self, input_data: dict, params: dict = None):
         """
         Sends a prediction request to the MLflow inference server.
 
         Args:
-            input_data (dict): The input data as a dictionary (e.g., a DataFrame
-                               converted to JSON with 'split' orientation).
+            input_data (dict)
             params (dict): Optional query parameters to be appended to the request URL.
 
         Returns:
