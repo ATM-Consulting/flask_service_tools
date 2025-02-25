@@ -1,9 +1,8 @@
 import requests
 
 class AuthManager:
-    def __init__(self, access_control_url, timeout=5):
+    def __init__(self, access_control_url):
         self.access_control_url = access_control_url
-        self.timeout = timeout
 
     def validate_token(self, authorization_header, required_permissions):
         if not authorization_header:
@@ -22,9 +21,7 @@ class AuthManager:
             response = requests.post(
                 f"{self.access_control_url}/validate_access_token",
                 json=payload,
-                timeout=self.timeout
             )
-            response.raise_for_status()
             data = response.json()
             return True, data
 
