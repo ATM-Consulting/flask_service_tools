@@ -22,8 +22,13 @@ class AuthManager:
                 f"{self.access_control_url}/validate_access_token",
                 json=payload,
             )
+            response.raise_for_status()
             data = response.json()
-            return True, data
+
+            is_valid = data.get("valid", False)
+            message = data.get("message", "No message provided")
+
+            return is_valid, {"message": message}
 
         except requests.exceptions.HTTPError as http_err:
             return False, {"message": f"HTTP error occurred: {http_err}", "status_code": response.status_code}
