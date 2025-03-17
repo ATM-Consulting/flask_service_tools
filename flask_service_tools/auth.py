@@ -1,5 +1,6 @@
 import requests
 
+
 class AuthManager:
     def __init__(self, access_control_url):
         self.access_control_url = access_control_url
@@ -26,11 +27,13 @@ class AuthManager:
 
             is_valid = data.get("valid", False)
             message = data.get("message", "No message provided")
+            user_uuid = data.get("user_uuid", "")
 
-            return is_valid, {"message": message}
+            return is_valid, {"message": message, "user_uuid": user_uuid}
 
         except requests.exceptions.ConnectionError:
-            return False, {"message": "Failed to connect to the access control service. Please check the URL or service availability."}
+            return False, {
+                "message": "Failed to connect to the access control service. Please check the URL or service availability."}
 
         except requests.exceptions.Timeout:
             return False, {"message": "Request timed out. The access control service may be slow or unavailable."}
