@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, String, Float, BigInteger, Table, MetaData
+from sqlalchemy import create_engine, Column, String, Float, BigInteger, Table, MetaData, and_
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
@@ -50,11 +50,54 @@ class DBManager:
             metadata = MetaData()
             custom_table = Table(table_name, metadata, autoload_with=self.engine)
             insert_stmt = custom_table.insert().values(**data)
-            session.execute(insert_stmt)
+            result = session.execute(insert_stmt)
             session.commit()
-            return True
+            inserted_id = result.inserted_primary_key[0] if result.inserted_primary_key else None
+            return inserted_id
         except SQLAlchemyError as e:
             session.rollback()
             return e
         finally:
             session.close()
+
+    def select_custom_logs(self, table_name, filters=None):
+        session = self.Session()
+        try:
+            metadata = MetaData()
+            custom_table = Table(table_name, metadata, autoload_with=self.engine)
+            query = session.query(custom_table)
+            if filters:
+                conditions = [custom_table.c[key] == value for key, value in filters.items()]
+                query = query.filter(and_(*conditions))
+            results = query.all()
+            return [dict(row._mapping) for row in results]
+        except SQLAlchemyError as e:
+            return e
+        finally:
+            session.close()
+
+    def update_custom_logs(self, table_name, filters, update_values):
+        session = self.Session()
+        try:
+            metadata = MetaData()
+            custom_table = Table(table_name, metadata, autoload_with=self.engine)
+            conditions = [custom_table.c[key] == value for key, value in filters.items()]
+            update_stmt = custom_table.update().where(and_(*conditions)).values(**update_values)
+            result = session.execute(update_stmt)
+            session.commit()
+            return result.rowcount
+        except SQLAlchemyError as e:
+            session.rollback()
+            return e
+        finally:
+            session.close()
+
+# Examples
+#
+# logs = db.select_custom_logs('custom_log_table', filters={"user_uuid": "abc-123"})
+#
+# updated_count = db.update_custom_logs(
+#     'custom_log_table',
+#     filters={"user_uuid": "abc-123"},
+#     update_values={"response_status": "success"}
+# )
