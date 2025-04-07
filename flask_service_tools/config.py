@@ -17,7 +17,11 @@ class Config:
     UM_DB_PORT = int(os.getenv("UM_DB_PORT", 3306))
     UM_DB_USER = os.getenv("UM_DB_USER", "client")
     UM_DB_NAME = os.getenv("UM_DB_NAME", "usage_monitoring_db")
-    UM_DB_PASSWORD = open(os.getenv("UM_DB_PASSWORD_PATH", "/run/secrets/um_mysql_password")).read().strip()
+    UM_DB_PASSWORD = None
+    um_password_path = os.getenv("UM_DB_PASSWORD_PATH", "/run/secrets/um_mysql_password")
+    if os.path.exists(um_password_path):
+        with open(um_password_path) as f:
+            UM_DB_PASSWORD = f.read().strip()
 
     # Logging configuration
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
