@@ -52,7 +52,7 @@ class DBManager:
             insert_stmt = custom_table.insert().values(**data)
             result = session.execute(insert_stmt)
             session.commit()
-            inserted_id = result.inserted_primary_key[0] if result.inserted_primary_key else None
+            inserted_id = result.inserted_primary_key[0] if result.inserted_primary_key else 0
             return inserted_id
         except SQLAlchemyError as e:
             session.rollback()
