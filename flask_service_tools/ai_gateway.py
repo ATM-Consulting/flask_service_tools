@@ -22,7 +22,7 @@ class AIGatewayClient:
         try:
             self.logger.info("Sending prediction request to endpoint: %s", endpoint)
             start_time = int(time.time() * 1000)
-            response = self.client.predict(
+            response = self.client.query(
                 endpoint=endpoint,
                 inputs={"messages": messages},
             )
